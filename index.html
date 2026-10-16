@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f97316">
+  <title>Treads Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark">TT</div>
+    <div>
+      <h1>Treads Tracker</h1>
+      <p>Secure field-record management</p>
+    </div>
+    <button id="signOutBtn" class="button button-quiet hidden" type="button">Sign out</button>
+  </header>
+
+  <main class="page">
+    <section id="configNotice" class="notice hidden">
+      <strong>Setup required</strong>
+      <p>Add your Supabase Project URL and publishable/anon key in <code>app.js</code>. Never put a service-role or secret key in this website.</p>
+    </section>
+
+    <section id="loginView" class="panel login-panel">
+      <div class="eyebrow">WELCOME BACK</div>
+      <h2>Sign in to Treads Tracker</h2>
+      <p class="muted">Use the individual account provided to you.</p>
+      <form id="loginForm" class="stack">
+        <label>Email address<input id="email" type="email" autocomplete="username" required></label>
+        <label>Password<input id="password" type="password" autocomplete="current-password" required></label>
+        <button class="button button-primary" type="submit">Sign in</button>
+        <p id="loginMessage" class="message" role="status"></p>
+      </form>
+    </section>
+
+    <section id="appView" class="hidden">
+      <div class="welcome-row">
+        <div>
+          <div class="eyebrow" id="roleLabel">SECURE WORKSPACE</div>
+          <h2 id="welcomeTitle">Your workspace</h2>
+          <p id="welcomeSubtitle" class="muted">Your records appear here.</p>
+        </div>
+        <span id="rolePill" class="pill">Account</span>
+      </div>
+
+      <section id="statsGrid" class="stats-grid">
+        <article class="stat-card"><span>Pending</span><strong id="pendingCount">—</strong></article>
+        <article class="stat-card"><span>Processing</span><strong id="processingCount">—</strong></article>
+        <article class="stat-card"><span>Completed currently retained</span><strong id="completedCount">—</strong></article>
+        <article id="allTimeStat" class="stat-card"><span>Completion events recorded</span><strong id="allTimeCount">—</strong></article>
+      </section>
+
+      <section id="agentFormPanel" class="panel hidden">
+        <div class="section-heading">
+          <div><div class="eyebrow">NEW SUBMISSION</div><h3>Submit a record</h3></div>
+        </div>
+        <form id="submissionForm" class="stack">
+          <label>Record title or reference<input id="recordTitle" maxlength="160" required placeholder="Enter the authorized record title/reference"></label>
+          <label>Record details<textarea id="recordDetails" rows="5" maxlength="12000" required placeholder="Enter only information you are authorized to collect"></textarea></label>
+          <p class="muted small">Submit only information authorized for this workflow. Avoid unnecessary personal or sensitive details.</p>
+          <button class="button button-primary" type="submit">Submit record</button>
+          <p id="submissionMessage" class="message" role="status"></p>
+        </form>
+      </section>
+
+      <section id="recordsPanel" class="panel records-panel">
+        <div class="section-heading">
+          <div><div class="eyebrow">RECORDS</div><h3 id="recordsHeading">Your submissions</h3></div>
+          <button id="refreshBtn" class="button button-secondary" type="button">Refresh</button>
+        </div>
+        <div class="tabs" id="statusTabs">
+          <button class="tab active" type="button" data-filter="all">All</button>
+          <button class="tab" type="button" data-filter="pending">Pending</button>
+          <button class="tab" type="button" data-filter="processing">Processing</button>
+          <button class="tab" type="button" data-filter="completed">Completed</button>
+        </div>
+        <div id="recordsList" class="records-list"></div>
+        <p id="recordsMessage" class="message" role="status"></p>
+      </section>
+      <p class="footnote">Access is controlled by Supabase authentication and database policies. Do not use this site for real records until your administrator has tested permissions and retention requirements.</p>
+    </section>
+  </main>
+  <footer> Treads Tracker · Use only with authorization </footer>
+</body>
+</html>
