@@ -3,8 +3,8 @@
  Replace only the two configuration placeholders below.
  Use the Supabase publishable/anon key, NEVER a service-role or secret key.
 */
-const SUPABASE_URL = "PASTE_YOUR_SUPABASE_PROJECT_URL_HERE";
-const SUPABASE_PUBLIC_KEY = "PASTE_YOUR_SUPABASE_PUBLISHABLE_OR_ANON_KEY_HERE";
+const SUPABASE_URL = "https://wdoezossfhorfdaznbxy.supabase.co";
+const SUPABASE_PUBLIC_KEY = "sb_publishable_rmJ0saEe34YCktRtNPpluw_UEkKpPxP";
 
 const configured =
   SUPABASE_URL.startsWith("https://") &&
